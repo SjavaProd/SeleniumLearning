@@ -11,7 +11,6 @@ public class BasePage extends LoginPage {
 
     public void setUserID(String strID) {
         userID.sendKeys(strID);
-        //driver.findElement(userID).sendKeys(strID);
     }
 
     //Set password to field
