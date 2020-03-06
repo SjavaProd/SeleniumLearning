@@ -2,11 +2,17 @@ package com.base;
 
 import com.page.LoginPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class BasePage extends LoginPage {
+public class BasePage {
+
+    public WebDriver driver;
+    public WebElement userID;
+    public WebElement userPassword;
+    public WebElement loginSubmit;
 
     public BasePage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
     }
 
     public void setUserID(String strID) {
