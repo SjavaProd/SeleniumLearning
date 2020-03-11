@@ -1,19 +1,21 @@
 package com.page;
 
 import com.base.BasePage;
-import com.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage {
-    //Constructor for class
+    /**
+     * Constructor for the class with using PageObjects
+     * @param driver
+     */
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-
     }
+
     /**
      * All WebElements are identified by @FindBy annotation
      */
@@ -24,18 +26,15 @@ public class LoginPage extends BasePage {
     @FindBy(name = "btnLogin")
     public WebElement loginSubmit;
 
-    @Override
-    public void setUserID(String strID) {
-        this.userID.sendKeys(strID);
+    /**
+     * Submit form with all required params
+     * @param strID
+     * @param strPassword
+     */
+    public void loginToSite(String strID, String strPassword){
+        setUserID(userID, strID);
+        setUserPassword(userPassword, strPassword);
+        submitForm(loginSubmit);
     }
 
-    @Override
-    public void setUserPassword(String strPassword) {
-        this.userPassword.sendKeys(strPassword);
-    }
-
-    @Override
-    public void submitForm() {
-        this.loginSubmit.click();
-    }
 }

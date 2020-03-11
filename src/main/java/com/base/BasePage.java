@@ -1,42 +1,39 @@
 package com.base;
 
-import com.page.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class BasePage {
 
     public WebDriver driver;
-    public WebElement userID;
-    public WebElement userPassword;
-    public WebElement loginSubmit;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void setUserID(String strID) {
+    /**
+     * Set id value to the implicitly declared variable
+     * @param userID
+     * @param strID
+     */
+    public void setUserID(WebElement userID, String strID) {
         userID.sendKeys(strID);
     }
 
-    //Set password to field
-    public void setUserPassword(String strPassword){
+    /**
+     * Set password value to the implicitly declared variable
+     * @param userPassword
+     * @param strPassword
+     */
+    public void setUserPassword(WebElement userPassword, String strPassword){
         userPassword.sendKeys(strPassword);
     }
 
-    //Click Submit button
-    public void submitForm(){
-        loginSubmit.click();
-    }
-
     /**
-     * Submit form with all required params
-     * @param strID
-     * @param strPassword
+     * Click the "Login" button
+     * @param loginSubmit
      */
-    public void loginToSite(String strID, String strPassword){
-        this.setUserID(strID);
-        this.setUserPassword(strPassword);
-        this.submitForm();
+    public void submitForm(WebElement loginSubmit){
+        loginSubmit.click();
     }
 }
