@@ -24,17 +24,18 @@ public class LoginPage extends BasePage {
     @FindBy(name = "password")
     public WebElement userPassword;
     @FindBy(name = "btnLogin")
-    public WebElement loginSubmit;
+    public WebElement loginButton;
 
     /**
      * Submit form with all required params
+     * setUserInput method is predefined in the parrent class
      * @param strID
      * @param strPassword
      */
     public void loginToSite(String strID, String strPassword){
-        setUserID(userID, strID);
-        setUserPassword(userPassword, strPassword);
-        submitForm(loginSubmit);
+        setUserInput(userID, strID);
+        setUserInput(userPassword, strPassword);
+        clickButton(loginButton);
     }
 
 }

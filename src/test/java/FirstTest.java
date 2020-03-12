@@ -14,7 +14,14 @@ public class FirstTest extends BaseTest{
         driver.get("http://demo.guru99.com/V4/");
         loginPageTest = new LoginPage(driver);
         loginPageTest.loginToSite("mngr249880", "vurAhyz");
-        String expectedID = driver.findElement(By.xpath("/html/body/table/tbody/tr/td/table/tbody/tr[3]/td")).getText();
+
+        /*The following path to the required element (expectedID) can be found by the:
+        absolute XPath: /html/body/table/tbody/tr/td/table/tbody/tr[3]/td;
+        relative XPath: //body//tr[3];
+        CSS Path: html body table.layout tbody tr td table tbody tr.heading3 td;
+        CSS selector: tr.heading3 > td:nth-child(1)
+         */
+        String expectedID = driver.findElement(By.cssSelector("tr.heading3 > td:nth-child(1)")).getText();
         Assert.assertTrue(expectedID.contains("Manger Id : mngr249880"));
     }
 }
