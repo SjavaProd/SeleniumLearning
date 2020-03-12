@@ -12,7 +12,7 @@ public class BasePage {
     }
 
     /**
-     * Set password value to the implicitly declared variable
+     * Set user`s input to the implicitly declared variable
      * @param element
      * @param userInput
      */
