@@ -35,7 +35,7 @@ public class LoginPage extends BasePage {
     public void loginToSite(String strID, String strPassword){
         setUserInput(userID, strID);
         setUserInput(userPassword, strPassword);
-        clickButton(loginButton);
+        mouseClick(loginButton);
     }
 
 }
