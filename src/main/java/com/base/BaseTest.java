@@ -33,7 +33,7 @@ public class BaseTest {
     public void quit(){
 
         if (driver !=null){
-            driver.manage().deleteAllCookies();
+            //driver.manage().deleteAllCookies();
             driver.quit();
             DRIVER_CONTAINER.remove();
         }

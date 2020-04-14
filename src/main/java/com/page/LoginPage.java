@@ -20,11 +20,18 @@ public class LoginPage extends BasePage {
      * All WebElements are identified by @FindBy annotation
      */
     @FindBy(name = "uid")
-    public WebElement userID;
+    private WebElement userID;
     @FindBy(name = "password")
-    public WebElement userPassword;
+    private WebElement userPassword;
     @FindBy(name = "btnLogin")
-    public WebElement loginButton;
+    private WebElement loginButton;
+    @FindBy (css = "tr.heading3 > td:nth-child(1)")
+    private WebElement userCred;
+
+
+    public void navigateToSite(String site) {
+        super.navigateToSite(site);
+    }
 
     /**
      * Submit form with all required params
@@ -38,4 +45,7 @@ public class LoginPage extends BasePage {
         mouseClick(loginButton);
     }
 
+    public String getElementText() {
+        return getElementText(userCred);
+    }
 }

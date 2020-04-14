@@ -8,13 +8,10 @@ package com.page;
  */
 
 import com.base.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,50 +23,70 @@ public class SearchPage extends BasePage {
     }
 
     @FindBy (linkText = "Electronics")
-    public WebElement category;
+    private WebElement electronicsCategory;
     @FindBy (linkText = "Computers & Tablets")
-    public WebElement subcategory;
+    private WebElement computersSubcategory;
     @FindBy (linkText = "Computer Components & Parts")
-    public WebElement subcategory1;
+    private WebElement componentsSubcategory;
     @FindBy (linkText = "Graphics/Video Cards")
-    public WebElement subcategory2;
-    @FindBy (css = "#w2-w1-w0-w0-w1 > button")
-    public WebElement advancedSearchWindow;
-    @FindBy (id = "refineOverlay-subPanel-Brand_ZOTAC_cbx")
-    public WebElement brandSelection;
-    @FindBy (id = "refineOverlay-mainPanel-price")
-    public WebElement priceSelection;
-    @FindBy (id = "refineOverlay-subPanel-_x-price-0-1[0]")
-    public WebElement maxPrice;
-    @FindBy (id = "refineOverlay-mainPanel-Memory%20Size")
-    public WebElement memorySizeSelector;
-    @FindBy (id = "refineOverlay-subPanel-Memory%20Size_8%20GB_cbx")
-    public WebElement memorySize;
-    @FindBy (css = "#refineOverlay-footerId > div.x-overlay-footer__apply > button")
-    public WebElement applyButton;
+    private WebElement graphicsSubcategory;
+
+    @FindBy (css = "#s0-28-13_2-0-1\\[1\\]-0-6-2 > button")
+    private WebElement advancedSearchButton;
+    @FindBy (id = "c3-mainPanel-Brand")
+    private WebElement brandSelector;
+    @FindBy (css = "#c3-subPanel-Brand_ZOTAC > label")
+    private WebElement zotacBrand;
+
+    @FindBy (id = "c3-subPanel-_x-price-textrange")
+    private WebElement label;
+
+    @FindBy (id = "c3-mainPanel-price")
+    private WebElement priceSelector;
+    @FindBy (xpath = "//*[@id=\"c3-subPanel-_x-price-textrange\"]/div/div[2]/div/input")
+    private WebElement maxPrice;
+    @FindBy (id = "c3-mainPanel-Memory%20Size")
+    private WebElement memorySizeSelector;
+    @FindBy (id = "c3-subPanel-Memory%20Size_8%20GB_cbx")
+    private WebElement memorySizeValue8gb;
+    @FindBy (id = "c3-subPanel-Memory%20Size_6%20GB_cbx")
+    private WebElement memorySizeValue6gb;
+    @FindBy (id = "c3-subPanel-Memory%20Size_4%20GB_cbx")
+    private WebElement memorySizeValue4gb;
+    @FindBy (xpath = "//*[@id=\"c3-footerId\"]/div[2]/button")
+    private WebElement applyButton;
+
     @FindBy (className = "s-item__price")
-    public List<WebElement> priceValue;
+    private List<WebElement> priceValue;
+    @FindBy (xpath = "//*[@id=\"s0-25-9-0-1[0]-0-1-6-5\"]/div[2]/div/div/h2")
+    private WebElement quantity;
 
     public void proceedToSearch(){
-        mouseOver(category);
-        mouseClick(subcategory);
-        mouseClick(subcategory1);
-        mouseClick(subcategory2);
+        mouseOver(electronicsCategory);
+        mouseClick(computersSubcategory);
+        mouseClick(componentsSubcategory);
+        mouseClick(graphicsSubcategory);
     }
 
     public void setupFilters(String value){
-        mouseClick(advancedSearchWindow);
-        mouseClick(brandSelection);
-        mouseClick(priceSelection);
+        scrollToElement(advancedSearchButton);
+        mouseClick(advancedSearchButton);
+        mouseClick(brandSelector);
+        mouseClick(zotacBrand);
+        mouseClick(priceSelector);
+        waitForElementIsClickable(maxPrice);
         setUserInput(maxPrice, value);
         mouseClick(memorySizeSelector);
-        mouseClick(memorySize);
+        mouseClick(memorySizeValue8gb);
+        //waitForClick(memorySizeValue6gb);
+        //mouseClick(memorySizeValue6gb);
+        waitForElementIsClickable(memorySizeValue4gb);
+        mouseClick(memorySizeValue4gb);
         mouseClick(applyButton);
     }
 
     public void calculatePriceOfMatchedItems(){
-        WebDriverWait wait=new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#w7-w0 > div:nth-child(2) > div > div > h2")));
+        waitForElementIsVisible(quantity);
         double totalPrice = 0;
         int counterOfMatchedItems = 0;
         for (int i = 0; i < priceValue.size(); i++) {
